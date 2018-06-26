@@ -21,7 +21,7 @@ var SnakeGame = function() {
 
 }
 
-// THIS FUNCTION WILL ANIMATE ALL OBJECTS (INCLUDING SNAKES) ON THE CANVAS, AT A RATE OF 500MS (IE. EVERY HALF-SECOND).
+// THIS FUNCTION WILL ANIMATE ALL OBJECTS (INCLUDING SNAKES) ON THE CANVAS, AT A RATE OF 250MS (IE. EVERY -SECOND).
 // "GLOBAL TICK" REFERS TO THIS SWEEP EVERY .5 SECONDS TO UPDATE THE GAME SPACE.
 
 SnakeGame.prototype.globalTick = function(tickRate) {
@@ -79,23 +79,31 @@ SnakeGame.prototype.globalTick = function(tickRate) {
         
         // EDGE BOUNDARY LOOPING
         
-            if (that.snake.x < 0) {
+            // IF SNAKE GOES TO LEFT EDGE
+        
+        if (that.snake.x < 0) {
     
-            that.snake.x = canvas.width - unit;
+            that.snake.x = canvas.width;
         
-        } else if (that.snake.x > canvas.width) {
+            // IF SNAKE GOES TO RIGHT EDGE
         
-            that.snake.x = 0;
+        } else if (that.snake.x + unit > canvas.width) {
+        
+            that.snake.x = 0 - unit;
         
         }
         
+            // IF SNAKE GOES TO TOP EDGE
+        
         if (that.snake.y < 0) {
         
-            that.snake.y = canvas.height - unit;
+            that.snake.y = canvas.height;
         
-        } else if (that.snake.y > canvas.height) {
+            // IF SNAKE GOES TO BOTTOM EDGE
         
-            that.snake.y = 0;
+        } else if (that.snake.y + unit > canvas.height) {
+        
+            that.snake.y = 0 - unit;
 
         }
 
