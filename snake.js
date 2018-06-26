@@ -12,6 +12,7 @@ var food = {
 };
     
 var scoreSnakeOne = document.getElementById('snake1_score');
+var scoreSnakeTwo = document.getElementById('snake2_score');
 
 // FUNCTION TO START A NEW INSTANCE OF THE GAME
 
@@ -87,8 +88,9 @@ SnakeGame.prototype.globalTick = function (tickRate) {
             that.theSnake2.eatFood();
         }
 
-        
-    
+        scoreSnakeOne.innerHTML = "Snake 1: " + theGame.theSnake1.maxSegments;    
+        scoreSnakeTwo.innerHTML = "Snake 2: " + theGame.theSnake2.maxSegments;    
+
     }, tickRate);
     
 };
@@ -262,7 +264,7 @@ Snake.prototype.resetSnake = function () {
 
 // FUNCTION TO CHANGE DIRECTION OF THE SNAKE
 
-Snake.prototype.changeDirection = function () {
+Snake.prototype.changeDirection1 = function () {
     
     var that = this;
     
@@ -304,6 +306,49 @@ Snake.prototype.changeDirection = function () {
     });
 };
 
+Snake.prototype.changeDirection2 = function () {
+    
+    var that = this;
+    
+    document.addEventListener('keydown', function (e) {
+    
+        switch (e.which) {
+        
+            case 87:
+                
+                if (that.directionFacing != 'DOWN') {
+                    that.directionFacing = 'UP';
+                    that.img = 'snake_head_up.png';
+                }
+                break;
+
+            case 83:
+
+                if (that.directionFacing != 'UP') {
+                    that.directionFacing = 'DOWN';
+                    that.img = 'snake_head_down.png';
+                }
+                break;
+    
+            case 68:
+            
+                if (that.directionFacing != 'LEFT') {
+                    that.directionFacing = 'RIGHT';
+                    that.img = 'snake_head_right.png';
+                }
+                break;
+    
+            case 65:
+                if (that.directionFacing != 'RIGHT') {
+                    that.directionFacing = 'LEFT';
+                    that.img = 'snake_head_left.png';
+                }
+                break;
+        }
+    });
+};
+
+
 // ALL DOM FUNCTIONS PUSHED TO BOTTOM OF JS FILE
 
 document.getElementById("start-button").onclick = function () {
@@ -327,8 +372,8 @@ document.getElementById("start-button").onclick = function () {
     
     theGame.globalTick(250);
 
-    theGame.theSnake1.changeDirection();
-    theGame.theSnake2.changeDirection();
+    theGame.theSnake1.changeDirection1();
+    theGame.theSnake2.changeDirection2();
 
     theGame.allObjects = [{ x: 0, y: 0 }];
 
