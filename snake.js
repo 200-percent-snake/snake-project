@@ -10,6 +10,11 @@ var food = {
     x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
     y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
 };
+
+var speed = {
+    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+};
     
 var scoreSnakeOne = document.getElementById('snake1_score');
 var scoreSnakeTwo = document.getElementById('snake2_score');
@@ -19,14 +24,35 @@ var scoreSnakeTwo = document.getElementById('snake2_score');
 var SnakeGame = function () {
 
     this.allObjects = [];
+    this.speedBoost = {};
+    this.freezeSnake = {};
+    this.xPowerUp = {};
 
 };
 
-SnakeGame.prototype.winCheck = function() {
+SnakeGame.prototype.powerUpSelector = function () {
+    
+    var powerUps = ["speed", "freeze", "xPowerUp"];
+    var x = Math.floor(Math.random() * 3);
+   
+    return powerUps[x];
+
+};
+
+// SnakeGame.prototype.powerUpSpawnDraw = function (randPower) {
+    
+//     if (randPower === "speed") {
+        
+//     }
+
+    
+// };
+
+SnakeGame.prototype.winCheck = function () {
 
     if (theGame.theSnake1.segments.length >= 15) {
 
-        setTimeout(function() {
+        setTimeout(function () {
             
             alert('Green Snake is the winner!');
             window.location.reload();
@@ -37,7 +63,7 @@ SnakeGame.prototype.winCheck = function() {
 
     if (theGame.theSnake2.segments.length >= 15) {
 
-        setTimeout(function() {
+        setTimeout(function () {
             
             alert('Orange Snake is the winner!');
             window.location.reload();
@@ -45,7 +71,7 @@ SnakeGame.prototype.winCheck = function() {
         }, 250);
     }
 
-}
+};
 
 // FUNCTION TO SPAWN NEW FOOD AT RANDOM LOCATION
 
@@ -65,6 +91,26 @@ SnakeGame.prototype.drawFood = function () {
     ctx.fillRect(food.x, food.y, 20, 20);
 
 };
+
+
+SnakeGame.prototype.spawnSpeed = function () {
+
+    speed = {
+        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+    };
+};
+
+
+SnakeGame.prototype.drawSpeed = function () {
+
+    ctx.fillStyle = '#ffeb3b';
+    
+    ctx.fillRect(speed.x, speed.y, 20, 20);
+
+};
+
+
 
 // -------------------------------------------------------------------------
 
@@ -111,16 +157,57 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         // DRAWING FOOD OBJECT FROM GLOBAL GAME CONSTRUCTOR IN ITS CURRENT (RANDOMIZED) POSITION
 
         that.drawFood();
-
-        // IF-ELSE TREES FOR BOTH SNAKES TO CHECK IF IT ATE FOOD
+        that.drawSpeed();
         
-        if (that.theSnake1.segments[0].x === food.x && that.theSnake1.segments[0].y === food.y) {
+        // CHECKS BOTH SNAKES IF IT ATE FOOD/SPEED
+        var eatingFood = false;
+        var eatingSpeed = false;
+
+        for (var i = 0; i < that.theSnake1.segments.length; i++) {
+            
+            if (that.theSnake1.segments[i].x === food.x && that.theSnake1.segments[i].y === food.y) {
+                eatingFood = true;
+            }
+            
+            if (that.theSnake1.segments[i].x === speed.x && that.theSnake1.segments[i].y === speed.y) {
+                eatingSpeed = true;
+            }
+        }
+        
+        if (eatingFood) {
             that.theSnake1.eatFood();
+            eatingFood = false;
+
+        }
+        
+        if (eatingSpeed) {
+            that.theSnake1.eatSpeed();
+            eatingSpeed = false;
         }
 
-        if (that.theSnake2.segments[0].x === food.x && that.theSnake2.segments[0].y === food.y) {
-            that.theSnake2.eatFood();
+
+        for (var i = 0; i < that.theSnake2.segments.length; i++) {
+            
+            if (that.theSnake2.segments[i].x === food.x && that.theSnake2.segments[i].y === food.y) {
+                eatingFood = true;
+                
+            }
+            if (that.theSnake2.segments[i].x === speed.x && that.theSnake2.segments[i].y === speed.y) {
+                eatingSpeed = true;
+            }
         }
+
+        if (eatingFood) {
+            that.theSnake2.eatFood();
+            eatingFood = false;
+
+        }
+        
+        if (eatingSpeed) {
+            that.theSnake2.eatSpeed();
+            eatingSpeed = false;
+        }
+
 
         // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
         
@@ -281,6 +368,17 @@ Snake.prototype.eatFood = function () {
     
     that.maxSegments++;
     theGame.spawnFood();
+
+};
+
+Snake.prototype.eatSpeed = function () {
+
+    var that = this;
+    
+    that.speed = 2*that.speed;
+    theGame.spawnSpeed();
+
+    setTimeout(function () { that.speed = that.speed/2; }, 10000);
 
 };
 
