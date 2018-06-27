@@ -213,43 +213,53 @@ Snake.prototype.move = function () {
 
         case 'UP':
             if (that.canMove(that.x, that.y - unit, theGame.allObjects)) {
-                that.y -= unit;
+
+                for (var i = 1; i <= (this.speed / 20); i++) {
+                    that.y -= unit;
                 that.segments.unshift({ x: that.x, y: that.y });
                 if (that.segments.length > that.maxSegments) {
                     that.segments.pop();
+                }
                 }
             }
             break;
 
         case 'DOWN':
             if (that.canMove(that.x, that.y + unit, theGame.allObjects)) {
-                that.y += unit;
+                for (var i = 1; i <= (this.speed / 20); i++) {
+                
+                    that.y += unit;
                 that.segments.unshift({ x: that.x, y: that.y });
                 if (that.segments.length > that.maxSegments) {
                     that.segments.pop();
                 }
         
             }
+        }
             break;
 
         case 'RIGHT':
             if (that.canMove(that.x + unit, that.y, theGame.allObjects)) {
+                for (var i = 1; i <= (this.speed / 20); i++) {
                 that.x += unit;
                 that.segments.unshift({ x: that.x, y: that.y });
                 if (that.segments.length > that.maxSegments) {
                     that.segments.pop();
                 }
             }
+        }
             break;
 
         case 'LEFT':
             if (that.canMove(that.x - unit, that.y, theGame.allObjects)) {
+                for (var i = 1; i <= (this.speed / 20); i++) {
                 that.x -= unit;
                 that.segments.unshift({ x: that.x, y: that.y });
                 if (that.segments.length > that.maxSegments) {
                     that.segments.pop();
                 }
             }
+        }
             break;
     }
 };
@@ -393,8 +403,8 @@ Snake.prototype.changeDirection2 = function () {
 document.getElementById("start-button").onclick = function () {
 
     theGame = new SnakeGame();
-    theSnake1 = new Snake(100, 200, 1, 10);
-    theSnake2 = new Snake(300, 200, 1, 10);
+    theSnake1 = new Snake(100, 200, 1, unit);
+    theSnake2 = new Snake(300, 200, 1, unit);
         
     
         
