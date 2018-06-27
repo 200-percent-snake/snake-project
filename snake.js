@@ -7,8 +7,8 @@ var ctx = canvas.getContext('2d');
 var unit = 20;
 
 var food = {
-    x: Math.round(Math.floor(Math.random() * 600) / 20) * 20,
-    y: Math.round(Math.floor(Math.random() * 900) / 20) * 20
+    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
 };
     
 var scoreSnakeOne = document.getElementById('snake1_score');
@@ -52,8 +52,8 @@ SnakeGame.prototype.winCheck = function() {
 SnakeGame.prototype.spawnFood = function () {
 
     food = {
-        x: Math.round(Math.floor(Math.random() * 600) / 20) * 20,
-        y: Math.round(Math.floor(Math.random() * 900) / 20) * 20
+        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
     };
 };
 
@@ -257,8 +257,8 @@ Snake.prototype.move = function () {
 Snake.prototype.resetSnake = function (whichSnake) {
     
     whichSnake.segments = [];
-    whichSnake.x = 460;
-    whichSnake.y = 360;
+    whichSnake.x = Math.round(Math.floor(Math.random() * 900) / 20) * 20;
+    whichSnake.y = Math.round(Math.floor(Math.random() * 600) / 20) * 20;
     whichSnake.maxSegments = 4;
 
 };
