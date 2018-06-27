@@ -5,15 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-    <button id="start-button">START GAME</button>
-    
-    <canvas id="canvas" height="400" width="400">
 
-    </canvas>
+    <div class="row">
+
+        <div class="col-md-3 center">
+
+            <h1>Rules!!!</h1>
+                
+        </div>
+
+
+        <div class="col-md-6 center">
+            
+            <canvas id="canvas" height="400" width="400"></canvas>
+           
+
+        </div>
+
+        
+        <div class="col-md-3 center">
+            
+            <h1>Power Ups???</h1>
+
+        </div>
+            
+    </div>
+
+    <div class="row center">
+        <button id="start-button">START GAME</button>
+    </div>
+    
+    <div class="row center">
+        <span id="snake1_score">Snake 1 Score</span>
+        <span id="snake2_score">Snake 2 Score</span>
+    </div>
+
+
     
     <script src="snake.js"></script>
 

@@ -1,3 +1,18 @@
 canvas {
     border: 1px solid black;
 }
+
+
+#snake1_score {
+
+}
+
+#snake2_score {
+    
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
