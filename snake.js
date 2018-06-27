@@ -56,6 +56,11 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        // SPLICING CURRENT POSITIONS OF ALL OF BOTH SNAKES' SEGMENTS INTO ALLOBJECTS ARRAY FOR COLLISION DETECTON
+
+        that.allObjects.splice(0, that.theSnake1.segments.length, that.theSnake1.segments);
+        that.allObjects.splice(1, that.theSnake2.segments.length, that.theSnake2.segments);
+
         // TURNING ON BOTH SNAKES' KEYDOWN LISTENER FUNCTIONS FOR CHANGING DIRECTION
         
         theGame.theSnake1.changeDirection1();
@@ -81,10 +86,6 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         // DRAWING FOOD OBJECT FROM GLOBAL GAME CONSTRUCTOR IN ITS CURRENT (RANDOMIZED) POSITION
 
         that.drawFood();
-
-        // SPLICING CURRENT POSITIONS OF ALL OF BOTH SNAKES' SEGMENTS INTO ALLOBJECTS ARRAY FOR COLLISION DETECTON
-
-        that.allObjects.splice(0, that.theSnake1.segments.length, that.theSnake1.segments);
 
         // IF-ELSE TREES FOR BOTH SNAKES TO CHECK IF IT ATE FOOD
         
@@ -165,7 +166,7 @@ Snake.prototype.canMove = function (snakeFutureX, snakeFutureY, objectsArray) {
         for (j = 0; j < objectsArray[i].length; j++) {
             if (objectsArray[i][j].x === snakeFutureX && objectsArray[i][j].y === snakeFutureY) {
                 
-                theGame.that.resetSnake();
+                that.resetSnake(that);
                 return false;
             }
         }
@@ -224,6 +225,15 @@ Snake.prototype.move = function () {
     }
 };
     
+Snake.prototype.resetSnake = function (whichSnake) {
+    
+    whichSnake.segments = [];
+    whichSnake.x = 460;
+    whichSnake.y = 360;
+    whichSnake.maxSegments = 4;
+
+};
+
 // FUNCTION FOR SNAKE EATING FOOD
 
 Snake.prototype.eatFood = function () {
@@ -256,16 +266,7 @@ Snake.prototype.drawSnake = function () {
         });
 };
 
-Snake.prototype.resetSnake = function () {
-    
-    var that = this;
-    
-    that.segments = [];
-    that.x = 200;
-    that.y = 200;
-    that.maxSegments = 4;
 
-};
 
 // FUNCTION TO CHANGE DIRECTION OF THE SNAKE
 
@@ -385,7 +386,7 @@ document.getElementById("start-button").onclick = function () {
     theGame.spawnFood();
     theGame.drawFood();
     
-    theGame.globalTick(250);
+    theGame.globalTick(150);
 
     theGame.allObjects = [{ x: 0, y: 0 }];
 
