@@ -35,10 +35,13 @@ SnakeGame.prototype.spawnFood = function () {
 
 SnakeGame.prototype.drawFood = function () {
 
+    ctx.fillStyle = 'red';
+    
     ctx.fillRect(food.x, food.y, 20, 20);
 
 };
 
+// -------------------------------------------------------------------------
 
 // THIS FUNCTION WILL ANIMATE ALL OBJECTS (INCLUDING SNAKES) ON THE CANVAS, AT A RATE OF 250MS (IE. EVERY -SECOND).
 // "GLOBAL TICK" REFERS TO THIS SWEEP EVERY .5 SECONDS TO UPDATE THE GAME SPACE.
@@ -49,37 +52,42 @@ SnakeGame.prototype.globalTick = function (tickRate) {
 
     setInterval(function () {
         
+        // CLEARING ENTIRE CANVAS ON EACH CYCLE
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // TURNING ON BOTH SNAKES' KEYDOWN LISTENER FUNCTIONS FOR CHANGING DIRECTION
+        
+        theGame.theSnake1.changeDirection1();
+        theGame.theSnake2.changeDirection2();
         
         // SWITCH TO MOVE SNAKE BASED ON DIRECTION IT'S FACING
 
         that.theSnake1.move();
         that.theSnake2.move();
         
-
         // DRAWING THE SNAKE BODY SEGMENTS
         
         ctx.fillStyle = 'green';
-        theGame.theSnake1.segments.forEach(function (eachSegment, index) {
-            ctx.fillRect(eachSegment.x, eachSegment.y, unit - 1, unit - 1);
-        });
-        theGame.theSnake2.segments.forEach(function (eachSegment, index) {
-            ctx.fillRect(eachSegment.x, eachSegment.y, unit - 1, unit - 1);
-        });
+        that.theSnake1.drawSnake();
+        ctx.fillStyle = 'red';
+        that.theSnake2.drawSnake();
+        
+        // CHECKING THAT SNAKES ARE WITHIN-BOUNDS -- IF NOT, LOOPING THEM BACK AROUND ON OTHER SIDE
         
         that.theSnake1.boundaryCheck();
         that.theSnake2.boundaryCheck();
         
-
-        // ctx.drawImage(theImage, that.snake.x, that.snake.y, that.snake.width, that.snake.height);
-
-        that.theSnake1.drawSnake();
-        that.theSnake2.drawSnake();
+        // DRAWING FOOD OBJECT FROM GLOBAL GAME CONSTRUCTOR IN ITS CURRENT (RANDOMIZED) POSITION
 
         that.drawFood();
 
+        // SPLICING CURRENT POSITIONS OF ALL OF BOTH SNAKES' SEGMENTS INTO ALLOBJECTS ARRAY FOR COLLISION DETECTON
+
         that.allObjects.splice(0, that.theSnake1.segments.length, that.theSnake1.segments);
 
+        // IF-ELSE TREES FOR BOTH SNAKES TO CHECK IF IT ATE FOOD
+        
         if (that.theSnake1.segments[0].x === food.x && that.theSnake1.segments[0].y === food.y) {
             that.theSnake1.eatFood();
         }
@@ -88,12 +96,16 @@ SnakeGame.prototype.globalTick = function (tickRate) {
             that.theSnake2.eatFood();
         }
 
+        // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
+        
         scoreSnakeOne.innerHTML = "Snake 1: " + theGame.theSnake1.maxSegments;    
         scoreSnakeTwo.innerHTML = "Snake 2: " + theGame.theSnake2.maxSegments;    
 
     }, tickRate);
     
 };
+
+// -------------------------------------------------------------------------
 
 // FUNCTION TO SPAWN A NEW SNAKE AT START OF GAME -- OR AT SOME LATER POINT
 
@@ -120,7 +132,7 @@ var Snake = function (startingX, startingY, lengthOfSnake, movementSpeed) {
 
 Snake.prototype.boundaryCheck = function () {
         
-    // IF SNAKE GOES TO LEFT EDGE
+        // IF SNAKE GOES TO LEFT EDGE
     
     if (this.x < 0) {
         this.x = canvas.width;
@@ -131,7 +143,7 @@ Snake.prototype.boundaryCheck = function () {
         this.x = 0 - unit;
     }
     
-    // IF SNAKE GOES TO TOP EDGE
+        // IF SNAKE GOES TO TOP EDGE
     
     if (this.y < 0) {
         this.y = canvas.height;
@@ -212,10 +224,6 @@ Snake.prototype.move = function () {
     }
 };
     
-
-
-
-
 // FUNCTION FOR SNAKE EATING FOOD
 
 Snake.prototype.eatFood = function () {
@@ -229,8 +237,6 @@ Snake.prototype.eatFood = function () {
 
 };
 
-
-
 Snake.prototype.drawSnake = function () {
     
     var that = this;
@@ -243,6 +249,11 @@ Snake.prototype.drawSnake = function () {
     
         ctx.drawImage(theImage, that.x, that.y, unit, unit);
     };
+
+    // ctx.fillStyle = 'green';
+        that.segments.forEach(function (eachSegment, index) {
+            ctx.fillRect(eachSegment.x, eachSegment.y, unit - 1, unit - 1);
+        });
 };
 
 Snake.prototype.resetSnake = function () {
@@ -256,12 +267,6 @@ Snake.prototype.resetSnake = function () {
 
 };
 
-
-
-
-
-
-
 // FUNCTION TO CHANGE DIRECTION OF THE SNAKE
 
 Snake.prototype.changeDirection1 = function () {
@@ -269,12 +274,13 @@ Snake.prototype.changeDirection1 = function () {
     var that = this;
     
     document.addEventListener('keydown', function (e) {
-    
+        
         switch (e.which) {
         
             case 38:
                 
                 if (that.directionFacing != 'DOWN') {
+                    e.preventDefault();
                     that.directionFacing = 'UP';
                     that.img = 'snake_head_up.png';
                 }
@@ -283,6 +289,7 @@ Snake.prototype.changeDirection1 = function () {
             case 40:
 
                 if (that.directionFacing != 'UP') {
+                    e.preventDefault();
                     that.directionFacing = 'DOWN';
                     that.img = 'snake_head_down.png';
                 }
@@ -291,6 +298,7 @@ Snake.prototype.changeDirection1 = function () {
             case 39:
             
                 if (that.directionFacing != 'LEFT') {
+                    e.preventDefault();
                     that.directionFacing = 'RIGHT';
                     that.img = 'snake_head_right.png';
                 }
@@ -298,6 +306,7 @@ Snake.prototype.changeDirection1 = function () {
     
             case 37:
                 if (that.directionFacing != 'RIGHT') {
+                    e.preventDefault();
                     that.directionFacing = 'LEFT';
                     that.img = 'snake_head_left.png';
                 }
@@ -317,31 +326,35 @@ Snake.prototype.changeDirection2 = function () {
             case 87:
                 
                 if (that.directionFacing != 'DOWN') {
+                    e.preventDefault();
                     that.directionFacing = 'UP';
-                    that.img = 'snake_head_up.png';
+                    that.img = 'snake_head2_up.png';
                 }
                 break;
 
             case 83:
 
                 if (that.directionFacing != 'UP') {
+                    e.preventDefault();
                     that.directionFacing = 'DOWN';
-                    that.img = 'snake_head_down.png';
+                    that.img = 'snake_head2_down.png';
                 }
                 break;
     
             case 68:
             
                 if (that.directionFacing != 'LEFT') {
+                    e.preventDefault();
                     that.directionFacing = 'RIGHT';
-                    that.img = 'snake_head_right.png';
+                    that.img = 'snake_head2_right.png';
                 }
                 break;
     
             case 65:
                 if (that.directionFacing != 'RIGHT') {
+                    e.preventDefault();
                     that.directionFacing = 'LEFT';
-                    that.img = 'snake_head_left.png';
+                    that.img = 'snake_head2_left.png';
                 }
                 break;
         }
@@ -362,18 +375,17 @@ document.getElementById("start-button").onclick = function () {
     // theGame.snake = theSnake;
     theGame.theSnake1 = theSnake1;
     theGame.theSnake2 = theSnake2;
+
+    // theGame.theSnake2.img = 'snake_head2_up.png';
     
     // theGame.snake.drawSnake();
-    theGame.theSnake1.drawSnake();
-    theGame.theSnake2.drawSnake();
+    // theGame.theSnake1.drawSnake();
+    // theGame.theSnake2.drawSnake();
         
     theGame.spawnFood();
     theGame.drawFood();
     
     theGame.globalTick(250);
-
-    theGame.theSnake1.changeDirection1();
-    theGame.theSnake2.changeDirection2();
 
     theGame.allObjects = [{ x: 0, y: 0 }];
 
