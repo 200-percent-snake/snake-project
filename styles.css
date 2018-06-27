@@ -4,11 +4,17 @@ canvas {
 
 
 #snake1_score {
+    font-size: 30px;
+    font-weight: bold;
+    color: #8bc34a;
 
 }
 
 #snake2_score {
-    
+    font-size: 30px;
+    color: #ff5722;
+    font-weight: bold;
+
 }
 
 body {
@@ -21,17 +27,32 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
 
-.btn-start {
+.even-space {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+
+}
+
+.button-start {
     background-color: #e53935;
     font-size: 21px; 
     line-height: 21px;
     padding: 20px;
     border-radius: 2px;
     box-shadow: rgb(0, 0, 0) 3px 3px 3px 3px;
-    /* border: 2px solid rgb(28, 110, 164); */
     border: none;
     display: inline-block;
+}
+
+.button-start:focus {
+    background-color: transparent;
+    border: 4px #e53935 solid;
+
 }
 

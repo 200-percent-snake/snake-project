@@ -68,9 +68,9 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         
         // DRAWING THE SNAKE BODY SEGMENTS
         
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = '#8bc34a';
         that.theSnake1.drawSnake();
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = '#ff5722';
         that.theSnake2.drawSnake();
         
         // CHECKING THAT SNAKES ARE WITHIN-BOUNDS -- IF NOT, LOOPING THEM BACK AROUND ON OTHER SIDE
@@ -98,8 +98,8 @@ SnakeGame.prototype.globalTick = function (tickRate) {
 
         // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
         
-        scoreSnakeOne.innerHTML = "Snake 1: " + theGame.theSnake1.maxSegments;    
-        scoreSnakeTwo.innerHTML = "Snake 2: " + theGame.theSnake2.maxSegments;    
+        scoreSnakeOne.innerHTML = "Snake 1:  " + theGame.theSnake1.maxSegments + " pts";    
+        scoreSnakeTwo.innerHTML = "Snake 2:  " + theGame.theSnake2.maxSegments + " pts";    
 
     }, tickRate);
     
