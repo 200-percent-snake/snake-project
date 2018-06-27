@@ -15,7 +15,12 @@ var speed = {
     x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
     y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
 };
-    
+
+var freeze = {
+    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+};
+
 var scoreSnakeOne = document.getElementById('snake1_score');
 var scoreSnakeTwo = document.getElementById('snake2_score');
 
@@ -110,7 +115,22 @@ SnakeGame.prototype.drawSpeed = function () {
 
 };
 
+SnakeGame.prototype.spawnFreeze = function () {
 
+    freeze = {
+        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+    };
+};
+
+
+SnakeGame.prototype.drawFreeze = function () {
+
+    ctx.fillStyle = '#81d4fa';
+    
+    ctx.fillRect(freeze.x, freeze.y, 20, 20);
+
+};
 
 // -------------------------------------------------------------------------
 
@@ -158,10 +178,16 @@ SnakeGame.prototype.globalTick = function (tickRate) {
 
         that.drawFood();
         that.drawSpeed();
+        that.drawFreeze();
         
         // CHECKS BOTH SNAKES IF IT ATE FOOD/SPEED
+
+        
         var eatingFood = false;
         var eatingSpeed = false;
+        var eatingFreeze = false;
+
+        // CHECKS SNAKE1 FOR EDIBLES
 
         for (var i = 0; i < that.theSnake1.segments.length; i++) {
             
@@ -172,40 +198,51 @@ SnakeGame.prototype.globalTick = function (tickRate) {
             if (that.theSnake1.segments[i].x === speed.x && that.theSnake1.segments[i].y === speed.y) {
                 eatingSpeed = true;
             }
+
+            if (that.theSnake1.segments[i].x === freeze.x && that.theSnake1.segments[i].y === freeze.y) {
+                eatingFreeze = true;
+            }
         }
         
         if (eatingFood) {
             that.theSnake1.eatFood();
             eatingFood = false;
-
         }
-        
         if (eatingSpeed) {
             that.theSnake1.eatSpeed();
             eatingSpeed = false;
         }
+        if (eatingFreeze) {
+            that.theSnake2.eatFreeze();
+            eatingFreeze = false;
+        }
 
 
+// CHECKS SNAKE2 FOR EDIBLES
         for (var i = 0; i < that.theSnake2.segments.length; i++) {
             
             if (that.theSnake2.segments[i].x === food.x && that.theSnake2.segments[i].y === food.y) {
                 eatingFood = true;
-                
             }
             if (that.theSnake2.segments[i].x === speed.x && that.theSnake2.segments[i].y === speed.y) {
                 eatingSpeed = true;
+            }
+            if (that.theSnake2.segments[i].x === freeze.x && that.theSnake2.segments[i].y === freeze.y) {
+                eatingFreeze = true;
             }
         }
 
         if (eatingFood) {
             that.theSnake2.eatFood();
             eatingFood = false;
-
         }
-        
         if (eatingSpeed) {
             that.theSnake2.eatSpeed();
             eatingSpeed = false;
+        }
+        if (eatingFreeze) {
+            that.theSnake1.eatFreeze();
+            eatingFreeze = false;
         }
 
 
@@ -368,7 +405,6 @@ Snake.prototype.eatFood = function () {
     
     that.maxSegments++;
     theGame.spawnFood();
-
 };
 
 Snake.prototype.eatSpeed = function () {
@@ -379,7 +415,16 @@ Snake.prototype.eatSpeed = function () {
     theGame.spawnSpeed();
 
     setTimeout(function () { that.speed = that.speed/2; }, 10000);
+};
 
+Snake.prototype.eatFreeze = function () {
+
+    var that = this;
+    
+    that.speed = that.speed*0;
+    theGame.spawnFreeze();
+
+    setTimeout(function () { that.speed = unit; }, 10000);
 };
 
 Snake.prototype.drawSnake = function () {
