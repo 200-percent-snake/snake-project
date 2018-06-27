@@ -10,3 +10,9 @@ canvas {
 #snake2_score {
     
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
