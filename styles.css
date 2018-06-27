@@ -11,8 +11,27 @@ canvas {
     
 }
 
+body {
+    background-color: #374046;
+    font-family: Roboto;
+    color: #eceff1;
+}
+
 .center {
     display: flex;
     justify-content: center;
     align-content: center;
 }
+
+.btn-start {
+    background-color: #e53935;
+    font-size: 21px; 
+    line-height: 21px;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: rgb(0, 0, 0) 3px 3px 3px 3px;
+    /* border: 2px solid rgb(28, 110, 164); */
+    border: none;
+    display: inline-block;
+}
+
