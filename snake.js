@@ -22,6 +22,31 @@ var SnakeGame = function () {
 
 };
 
+SnakeGame.prototype.winCheck = function() {
+
+    if (theGame.theSnake1.segments.length >= 15) {
+
+        setTimeout(function() {
+            
+            alert('Green Snake is the winner!');
+            window.location.reload();
+
+        }, 250);
+
+    }
+
+    if (theGame.theSnake2.segments.length >= 15) {
+
+        setTimeout(function() {
+            
+            alert('Orange Snake is the winner!');
+            window.location.reload();
+
+        }, 250);
+    }
+
+}
+
 // FUNCTION TO SPAWN NEW FOOD AT RANDOM LOCATION
 
 SnakeGame.prototype.spawnFood = function () {
@@ -100,7 +125,11 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
         
         scoreSnakeOne.innerHTML = "Snake 1:  " + theGame.theSnake1.maxSegments + " pts";    
-        scoreSnakeTwo.innerHTML = "Snake 2:  " + theGame.theSnake2.maxSegments + " pts";    
+        scoreSnakeTwo.innerHTML = "Snake 2:  " + theGame.theSnake2.maxSegments + " pts";
+        
+        // CHECKING TO SEE IF WIN CONDITION HAS BEEN MET
+
+        that.winCheck();
 
     }, tickRate);
     
@@ -242,8 +271,6 @@ Snake.prototype.eatFood = function () {
     
     that.maxSegments++;
     theGame.spawnFood();
-    
-    // } else return;
 
 };
 
@@ -259,8 +286,6 @@ Snake.prototype.drawSnake = function () {
     
         ctx.drawImage(theImage, that.x, that.y, unit, unit);
     };
-
-    // ctx.fillStyle = 'green';
         that.segments.forEach(function (eachSegment, index) {
             ctx.fillRect(eachSegment.x, eachSegment.y, unit - 1, unit - 1);
         });
