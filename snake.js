@@ -7,8 +7,8 @@ var ctx = canvas.getContext('2d');
 var unit = 20;
 
 var food = {
-    x: Math.round(Math.floor(Math.random() * 400) / 20) * 20,
-    y: Math.round(Math.floor(Math.random() * 400) / 20) * 20
+    x: Math.round(Math.floor(Math.random() * 600) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 900) / 20) * 20
 };
     
 var scoreSnakeOne = document.getElementById('snake1_score');
@@ -52,8 +52,8 @@ SnakeGame.prototype.winCheck = function() {
 SnakeGame.prototype.spawnFood = function () {
 
     food = {
-        x: Math.round(Math.floor(Math.random() * 400) / 20) * 20,
-        y: Math.round(Math.floor(Math.random() * 400) / 20) * 20
+        x: Math.round(Math.floor(Math.random() * 600) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 900) / 20) * 20
     };
 };
 
@@ -287,7 +287,7 @@ Snake.prototype.drawSnake = function () {
         ctx.drawImage(theImage, that.x, that.y, unit, unit);
     };
         that.segments.forEach(function (eachSegment, index) {
-            ctx.fillRect(eachSegment.x, eachSegment.y, unit - 1, unit - 1);
+            ctx.fillRect(eachSegment.x, eachSegment.y, unit, unit);
         });
 };
 
@@ -411,7 +411,7 @@ document.getElementById("start-button").onclick = function () {
     theGame.spawnFood();
     theGame.drawFood();
     
-    theGame.globalTick(150);
+    theGame.globalTick(100);
 
     theGame.allObjects = [{ x: 0, y: 0 }];
 
