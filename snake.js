@@ -44,15 +44,6 @@ SnakeGame.prototype.powerUpSelector = function () {
 
 };
 
-// SnakeGame.prototype.powerUpSpawnDraw = function (randPower) {
-    
-//     if (randPower === "speed") {
-        
-//     }
-
-    
-// };
-
 SnakeGame.prototype.winCheck = function () {
 
     if (theGame.theSnake1.segments.length >= 15) {
@@ -288,24 +279,28 @@ Snake.prototype.boundaryCheck = function () {
         
         // IF SNAKE GOES TO LEFT EDGE
     
-    if (this.x < 0) {
+    if (this.x + unit <= 0) {
         this.x = canvas.width;
     
         // IF SNAKE GOES TO RIGHT EDGE
     
     } else if (this.x + unit > canvas.width) {
-        this.x = 0 - unit;
+        console.log(this.x);
+        this.x = 0;
+        console.log(this.x);
     }
     
         // IF SNAKE GOES TO TOP EDGE
     
-    if (this.y < 0) {
+    if (this.y + unit <= 0) {
         this.y = canvas.height;
     
         // IF SNAKE GOES TO BOTTOM EDGE
     
     } else if (this.y + unit > canvas.height) {
-        this.y = 0 - unit;
+        console.log(this.y);
+        this.y = 0;
+        console.log(this.y);
     }
 };
 

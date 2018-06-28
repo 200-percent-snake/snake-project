@@ -15,9 +15,18 @@
     
     <div class="row">
 
-        <div class="col-md-2 center">
+        <div id="rules" class="col-md-2 center">
 
             <h1>Rules:</h1>
+            <ul>
+                <li>Controls for Green Snake:
+                    <br>↑ ↓ → ←
+                    <br>Controls for Orange Snake:
+                    <br>W A S D
+                </li>
+                <li>Maneuver your snake toward <b class="bolded">Food (<span id="red-square">&#x25A0;</span>)</b> to grow one body segment in size. Each body length segment is worth 1 point.</li>
+                <li>The first snake to reach 15 points wins!</li>
+            </ul>
                 
         </div>
 
@@ -30,10 +39,21 @@
         </div>
 
         
-        <div class="col-md-2 center">
+        <div id="powerups" class="col-md-2 center">
             
             <h1>Power Ups:</h1>
-
+            <ul>
+                <li><b>Speed (<span id="yellow-square">&#x25A0;</span>):</b>
+                    <br>Increase your snake's speed by 200%. Bonus expires after 5 seconds.
+                    <br>This speed bonus stacks on itself -- but at the cost of control!
+                </li>
+                <li><b>Freeze (<span id="blue-square">&#x25A0;</span>):</b>
+                    <br>Freeze your opponent in place for 5 seconds!
+                </li>
+                <li><b>Mirror (<span id="white-square">&#x25A0;</span>):</b>
+                    <br>Take over your opponent's snake so their movements mirror yours!
+                </li>
+            </ul>
         </div>
             
     </div>
