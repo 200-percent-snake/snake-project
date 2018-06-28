@@ -24,6 +24,10 @@ body {
     color: #eceff1;
 }
 
+ul {
+    padding-left: 15px;
+}
+
 .center {
     display: flex;
     justify-content: center;

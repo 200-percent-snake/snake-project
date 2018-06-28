@@ -7,19 +7,25 @@ var ctx = canvas.getContext('2d');
 var unit = 20;
 
 var food = {
-    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+    x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
 };
 
 var speed = {
-    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+    x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
 };
 
 var freeze = {
-    x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-    y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+    x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
 };
+
+var misdirection = {
+    x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+    y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
+};
+
 
 var scoreSnakeOne = document.getElementById('snake1_score');
 var scoreSnakeTwo = document.getElementById('snake2_score');
@@ -32,7 +38,6 @@ var SnakeGame = function () {
     this.speedBoost = {};
     this.freezeSnake = {};
     this.xPowerUp = {};
-
 };
 
 SnakeGame.prototype.powerUpSelector = function () {
@@ -41,7 +46,6 @@ SnakeGame.prototype.powerUpSelector = function () {
     var x = Math.floor(Math.random() * 3);
    
     return powerUps[x];
-
 };
 
 SnakeGame.prototype.winCheck = function () {
@@ -54,7 +58,6 @@ SnakeGame.prototype.winCheck = function () {
             window.location.reload();
 
         }, 250);
-
     }
 
     if (theGame.theSnake2.segments.length >= 15) {
@@ -66,7 +69,6 @@ SnakeGame.prototype.winCheck = function () {
 
         }, 250);
     }
-
 };
 
 // FUNCTION TO SPAWN NEW FOOD AT RANDOM LOCATION
@@ -74,8 +76,8 @@ SnakeGame.prototype.winCheck = function () {
 SnakeGame.prototype.spawnFood = function () {
 
     food = {
-        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+        x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
     };
 };
 
@@ -85,15 +87,14 @@ SnakeGame.prototype.drawFood = function () {
     ctx.fillStyle = 'red';
     
     ctx.fillRect(food.x, food.y, 20, 20);
-
 };
 
 
 SnakeGame.prototype.spawnSpeed = function () {
 
     speed = {
-        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+        x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
     };
 };
 
@@ -109,8 +110,8 @@ SnakeGame.prototype.drawSpeed = function () {
 SnakeGame.prototype.spawnFreeze = function () {
 
     freeze = {
-        x: Math.round(Math.floor(Math.random() * 900) / 20) * 20,
-        y: Math.round(Math.floor(Math.random() * 600) / 20) * 20
+        x: Math.round(Math.floor(Math.random() * 880) / 20) * 20,
+        y: Math.round(Math.floor(Math.random() * 580) / 20) * 20
     };
 };
 
@@ -120,7 +121,6 @@ SnakeGame.prototype.drawFreeze = function () {
     ctx.fillStyle = '#81d4fa';
     
     ctx.fillRect(freeze.x, freeze.y, 20, 20);
-
 };
 
 // -------------------------------------------------------------------------
@@ -155,10 +155,10 @@ SnakeGame.prototype.globalTick = function (tickRate) {
         
         // DRAWING THE SNAKE BODY SEGMENTS
         
-        ctx.fillStyle = '#8bc34a';
-        that.theSnake1.drawSnake();
-        ctx.fillStyle = '#ff5722';
-        that.theSnake2.drawSnake();
+        // ctx.fillStyle = '#8bc34a';
+        // that.theSnake1.drawSnake();
+        // ctx.fillStyle = '#ff5722';
+        // that.theSnake2.drawSnake();
         
         // CHECKING THAT SNAKES ARE WITHIN-BOUNDS -- IF NOT, LOOPING THEM BACK AROUND ON OTHER SIDE
         
@@ -236,7 +236,6 @@ SnakeGame.prototype.globalTick = function (tickRate) {
             eatingFreeze = false;
         }
 
-
         // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
         
         scoreSnakeOne.innerHTML = "Snake 1:  " + theGame.theSnake1.maxSegments + " pts";    
@@ -246,8 +245,12 @@ SnakeGame.prototype.globalTick = function (tickRate) {
 
         that.winCheck();
 
+        ctx.fillStyle = '#8bc34a';
+        that.theSnake1.drawSnake();
+        ctx.fillStyle = '#ff5722';
+        that.theSnake2.drawSnake();
+
     }, tickRate);
-    
 };
 
 // -------------------------------------------------------------------------
@@ -320,7 +323,6 @@ Snake.prototype.canMove = function (snakeFutureX, snakeFutureY, objectsArray) {
         }
     }
     return true;
-    
 };
 
 
@@ -341,7 +343,7 @@ Snake.prototype.move = function () {
                 }
                 }
             }
-            break;
+        break;
 
         case 'DOWN':
             if (that.canMove(that.x, that.y + unit, theGame.allObjects)) {
@@ -355,7 +357,7 @@ Snake.prototype.move = function () {
         
             }
         }
-            break;
+        break;
 
         case 'RIGHT':
             if (that.canMove(that.x + unit, that.y, theGame.allObjects)) {
@@ -367,7 +369,7 @@ Snake.prototype.move = function () {
                 }
             }
         }
-            break;
+        break;
 
         case 'LEFT':
             if (that.canMove(that.x - unit, that.y, theGame.allObjects)) {
@@ -379,17 +381,16 @@ Snake.prototype.move = function () {
                 }
             }
         }
-            break;
+        break;
     }
 };
     
 Snake.prototype.resetSnake = function (whichSnake) {
     
     whichSnake.segments = [];
-    whichSnake.x = Math.round(Math.floor(Math.random() * 900) / 20) * 20;
-    whichSnake.y = Math.round(Math.floor(Math.random() * 600) / 20) * 20;
+    whichSnake.x = Math.round(Math.floor(Math.random() * 880) / 20) * 20;
+    whichSnake.y = Math.round(Math.floor(Math.random() * 580) / 20) * 20;
     whichSnake.maxSegments = 4;
-
 };
 
 // FUNCTION FOR SNAKE EATING FOOD
@@ -434,9 +435,11 @@ Snake.prototype.drawSnake = function () {
     
         ctx.drawImage(theImage, that.x, that.y, unit, unit);
     };
-        that.segments.forEach(function (eachSegment, index) {
-            ctx.fillRect(eachSegment.x, eachSegment.y, unit, unit);
-        });
+
+    that.segments.forEach(function (eachSegment, index) {
+        
+        ctx.fillRect(eachSegment.x, eachSegment.y, unit, unit);
+    });
 };
 
 
@@ -458,7 +461,7 @@ Snake.prototype.changeDirection1 = function () {
                     that.directionFacing = 'UP';
                     that.img = 'snake_head_up.png';
                 }
-                break;
+            break;
 
             case 40:
 
@@ -467,7 +470,7 @@ Snake.prototype.changeDirection1 = function () {
                     that.directionFacing = 'DOWN';
                     that.img = 'snake_head_down.png';
                 }
-                break;
+            break;
     
             case 39:
             
@@ -476,7 +479,7 @@ Snake.prototype.changeDirection1 = function () {
                     that.directionFacing = 'RIGHT';
                     that.img = 'snake_head_right.png';
                 }
-                break;
+            break;
     
             case 37:
                 if (that.directionFacing != 'RIGHT') {
@@ -484,7 +487,7 @@ Snake.prototype.changeDirection1 = function () {
                     that.directionFacing = 'LEFT';
                     that.img = 'snake_head_left.png';
                 }
-                break;
+            break;
         }
     });
 };
@@ -504,7 +507,7 @@ Snake.prototype.changeDirection2 = function () {
                     that.directionFacing = 'UP';
                     that.img = 'snake_head2_up.png';
                 }
-                break;
+            break;
 
             case 83:
 
@@ -513,7 +516,7 @@ Snake.prototype.changeDirection2 = function () {
                     that.directionFacing = 'DOWN';
                     that.img = 'snake_head2_down.png';
                 }
-                break;
+            break;
     
             case 68:
             
@@ -522,7 +525,7 @@ Snake.prototype.changeDirection2 = function () {
                     that.directionFacing = 'RIGHT';
                     that.img = 'snake_head2_right.png';
                 }
-                break;
+            break;
     
             case 65:
                 if (that.directionFacing != 'RIGHT') {
@@ -530,7 +533,7 @@ Snake.prototype.changeDirection2 = function () {
                     that.directionFacing = 'LEFT';
                     that.img = 'snake_head2_left.png';
                 }
-                break;
+            break;
         }
     });
 };
@@ -543,8 +546,6 @@ document.getElementById("start-button").onclick = function () {
     theGame = new SnakeGame();
     theSnake1 = new Snake(100, 200, 1, unit);
     theSnake2 = new Snake(300, 200, 1, unit);
-        
-    
         
     // theGame.snake = theSnake;
     theGame.theSnake1 = theSnake1;
