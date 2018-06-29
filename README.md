@@ -1,6 +1,5 @@
 # 200% SNAKE
 
-200% Snake:
 An original JavaScript game by Ali Sattar & David Mudd
 
 First Ironhack Web Development Bootcamp project (approximately 90% complete).
