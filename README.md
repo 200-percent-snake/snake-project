@@ -11,7 +11,7 @@ Controls for Green Snake:
 ↑ ↓ → ← 
 Controls for Orange Snake: 
 W A S D
-Maneuver your snake toward Food (■) to grow one body segment in size. Each body length segment is worth 1 point.
+Maneuver your snake toward Food to grow one body segment in size. Each body length segment is worth 1 point.
 The first snake to reach 15 points wins!
 
 Power Ups:
