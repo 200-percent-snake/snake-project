@@ -1,4 +1,4 @@
-# snake-project
+# 200% SNAKE
 
 200% Snake:
 An original JavaScript game by Ali Sattar & David Mudd
