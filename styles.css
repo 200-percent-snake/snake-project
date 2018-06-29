@@ -17,15 +17,29 @@ canvas {
 
 }
 
+@font-face {
+    font-family: Bladerunner;
+    src: url("./BLADRMF_.TTF");
+}
+
+.title {
+    font-family: Bladerunner;
+    font-size: 85px;
+    background: linear-gradient(180deg, rgba(242,226,221,1) 0%, rgba(233,255,52,1) 30%, rgba(255,0,0,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 body {
     background-color: #374046;
-    font-family: Roboto;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 100;
     color: #eceff1;
 }
 
 ul {
     padding-left: 15px;
+    font-size: 15px;
 }
 
 .center {
@@ -33,7 +47,7 @@ ul {
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .even-space {
@@ -57,7 +71,7 @@ ul {
 
 .button-start:focus {
     background-color: transparent;
-    border: 4px #e53935 solid;
+    border: 5px #e53935 solid;
 
 }
 
@@ -99,6 +113,6 @@ ul {
     color: white;
 }
 
-.bolded {
-    font-weight: bolder;
-}
+/* .bolded {
+    font-weight: bold;
+} */
