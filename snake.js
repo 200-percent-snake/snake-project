@@ -238,8 +238,8 @@ SnakeGame.prototype.globalTick = function (tickRate) {
 
         // UPDATING THE SCORE (IE. SNAKES' LENGTHS) IN DOM
         
-        scoreSnakeOne.innerHTML = "Snake 1:  " + theGame.theSnake1.maxSegments + " pts";    
-        scoreSnakeTwo.innerHTML = "Snake 2:  " + theGame.theSnake2.maxSegments + " pts";
+        scoreSnakeOne.innerHTML = theGame.theSnake1.maxSegments;    
+        scoreSnakeTwo.innerHTML = theGame.theSnake2.maxSegments;
         
         // CHECKING TO SEE IF WIN CONDITION HAS BEEN MET
 
