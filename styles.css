@@ -29,6 +29,7 @@ canvas {
     background: linear-gradient(180deg, rgba(242,226,221,1) 0%, rgba(233,255,52,1) 30%, rgba(255,0,0,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
 
 #snake1_score {
     font-size: 40px;
