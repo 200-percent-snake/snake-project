@@ -550,12 +550,6 @@ document.getElementById("start-button").onclick = function () {
     // theGame.snake = theSnake;
     theGame.theSnake1 = theSnake1;
     theGame.theSnake2 = theSnake2;
-
-    // theGame.theSnake2.img = 'snake_head2_up.png';
-    
-    // theGame.snake.drawSnake();
-    // theGame.theSnake1.drawSnake();
-    // theGame.theSnake2.drawSnake();
         
     theGame.spawnFood();
     theGame.drawFood();
