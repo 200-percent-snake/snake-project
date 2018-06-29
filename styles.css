@@ -1,20 +1,33 @@
 canvas {
     border: 1px solid black;
+    background-color: rgba(0,0,0,.25);
 }
 
 
-#snake1_score {
+#snake1_score_container {
     font-size: 30px;
     font-weight: bold;
     color: #8bc34a;
 
 }
 
-#snake2_score {
+#snake2_score_container {
     font-size: 30px;
     color: #ff5722;
     font-weight: bold;
 
+}
+
+#snake1_score {
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+#snake2_score {
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
 }
 
 body {
@@ -37,11 +50,12 @@ ul {
 }
 
 .even-space {
+    margin-top: 25px;
+    margin-bottom: 50px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-content: center;
     align-items: center;
-
 }
 
 .button-start {
@@ -101,4 +115,16 @@ ul {
 
 .bolded {
     font-weight: bolder;
+}
+
+.pts {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#score_overall_container {
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
 }
