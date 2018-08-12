@@ -21,9 +21,9 @@ The first snake to reach 15 points wins!
 
 **Power Ups:**
 
-*Speed: 
-  *Increase your snake's speed by 200%. Bonus expires after 5 seconds. 
-  *This speed bonus stacks on itself -- but at the cost of control!
+Speed: 
+Increase your snake's speed by 200%. Bonus expires after 5 seconds. 
+This speed bonus stacks on itself -- but at the cost of control!
 
-*Freeze: 
-  *Freeze your opponent in place for 5 seconds!
+Freeze: 
+Freeze your opponent in place for 5 seconds!
