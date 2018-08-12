@@ -2,6 +2,11 @@
 
 An original JavaScript game by Ali Sattar & David Mudd
 
+Link to live application:
+https://200-percent-snake.github.io/snake-project/snake.html
+
+![200% Snake Screenshot](https://s3.amazonaws.com/alirsattar/snake-200_screenshot.png)
+
 First Ironhack Web Development Bootcamp project (approximately 90% complete).
 Presented 06/29/2018 in Miami, FL.
 
